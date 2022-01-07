@@ -1,0 +1,1 @@
+add_executable(ai_methods main.cpp)
