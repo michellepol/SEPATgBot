@@ -1,17 +1,20 @@
 #include <iostream>
-#include <tgbot/tgbot.h>
 #include <sstream>
 #include <vector>
 #include <exception>
-#include <Python.h>
-#include <curl/curl.h>
-#include <boost/date_time/gregorian/gregorian.hpp>
 #include <string>
 #include <memory>
 #include <unordered_map>
+
+#include <Python.h>
+#include <curl/curl.h>
+#include <tgbot/tgbot.h>
+#include <boost/date_time/gregorian/gregorian.hpp>
 #include <boost/regex.hpp>
 
-const std::string token = "1986031662:AAE6uNucgYjFzz1QnRuETvPcrcEtc1LJ2MM";
+
+
+const std::string token = "insert your token here";
 
 const std::string file_template = "https://api.telegram.org/file/bot";
 
@@ -244,11 +247,10 @@ int main()
     bot.getEvents().onCommand("refresh", [&bot, &invertedPhotoFilePath, &photoFilePath, &photoMimeType, &py_api, &state, &pylist](TgBot::Message::Ptr message)
                               {
                                   state = States::Points;
-                                  bot.getApi().sendMessage(message->chat->id,  "Работа со старым фото. Напоминаю. Эскиз может быть раскрашен по умолчанию, для этого нажмите /stop.");
-                                  bot.getApi().sendMessage(message->chat->id,  "Также вы можете ввести желаемые цвета в формате: x y цвет_в_коде_HEX, где x, y - координаты пикселя ");
-                                  bot.getApi().sendMessage(message->chat->id,  "Желаемая точка и область вокруг нее будут раскрашены в указанный цвет.");
-                                  bot.getApi().sendMessage(message->chat->id,  "Когда закончите вводить точки нажмите /stop "); 
-
+                                  bot.getApi().sendMessage(message->chat->id, "Работа со старым фото. Напоминаю. Эскиз может быть раскрашен по умолчанию, для этого нажмите /stop.");
+                                  bot.getApi().sendMessage(message->chat->id, "Также вы можете ввести желаемые цвета в формате: x y цвет_в_коде_HEX, где x, y - координаты пикселя ");
+                                  bot.getApi().sendMessage(message->chat->id, "Желаемая точка и область вокруг нее будут раскрашены в указанный цвет.");
+                                  bot.getApi().sendMessage(message->chat->id, "Когда закончите вводить точки нажмите /stop ");
                               });
 
     bot.getEvents().onNonCommandMessage([&bot, &state, &points_regex, &pylist, &width, &height, &compress](TgBot::Message::Ptr message)
